@@ -23,7 +23,7 @@ server.use('/api/actions', actionsRouter)
 server.get('/',(req,res)=>{
     try{
         const welcomeMessage = process.env.welcomeMessage
-        res.json({welcomeMessage: welcomeMessage})
+        res.send(`<h1>${welcomeMessage}</h1>`)
     }catch(error){
         console.error('\nERROR', error)
         res.status(500).json({error:'Cannot retrieve data'})
