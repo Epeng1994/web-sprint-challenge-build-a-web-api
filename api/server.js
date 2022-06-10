@@ -17,7 +17,7 @@ server.use('/api/projects',projectsRouter)
 server.use('/api/actions', actionsRouter)
 
 server.get('/',(req,res)=>{
-    res.json(`<h1>Welcome</h1>`)
+    res.send(`<h1>Welcome</h1>`)
 })
 
 server.use(errorCheck)
