@@ -7,6 +7,10 @@ const projectsRouter = require('./projects/projects-router')
 // Build your projects router in /api/projects/projects-router.js
 // Do NOT `server.listen()` inside this file!
 
+
+
+server.use(express.json())
+
 //Global error middleware
 function errorCheck(error, req, res, next){
     return error ?  res.status(500).json('Server Error') : next()
@@ -17,7 +21,14 @@ server.use('/api/projects',projectsRouter)
 server.use('/api/actions', actionsRouter)
 
 server.get('/',(req,res)=>{
-    res.send(`<h1>Welcome</h1>`)
+    try{
+        const welcomeMessage = process.env.welcomeMessage
+        res.json({welcomeMessage: welcomeMessage})
+    }catch(error){
+        console.error('\nERROR', error)
+        res.status(500).json({error:'Cannot retrieve data'})
+    }
+    
 })
 
 server.use(errorCheck)
